@@ -57,4 +57,5 @@ const server = http.createServer((req, res) => {
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
     console.info(`[${new Date()}] listening on ${port}`);
+    console.log(port);
 });
