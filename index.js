@@ -11,18 +11,11 @@ const server = http.createServer(basic, (req, res) => {
     console.info('Requested by ' + req.connection.remoteAddress);
 
     if (req.url === '/logout') {
-        res.writeHead(401, {
-            'Content-Type': 'text/html; charset=utf-8',
-            'Location': './logout2'
-        });
-        res.end('ログアウトしました');
-        return;
-    }
-    if (req.url === '/logout2') {
-        res.writeHead(200, {
-            'Content-Type': 'text/plain; charset=utf-8',
-        });
-        res.end('ログアウトしました');
+        // res.writeHead(401, {
+        //     'Content-Type': 'text/plain; charset=utf-8'
+        // });
+        
+        res.status('401').end('ログアウト');
         return;
     }
     
