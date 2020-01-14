@@ -25,7 +25,7 @@ const server = http.createServer(basic, (req, res) => {
     switch (req.method) {
         case 'GET':
             if (req.url === '/enquetes/yaki-shabu') {
-                res.write(pug.renderFile('./form.pug', {
+                res.write(pug.renderFile('./form.pug', './form.css', {
                     path: req.url,
                     firstItem: '焼き肉',
                     secondItem: 'しゃぶしゃぶ'
