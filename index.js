@@ -1,8 +1,23 @@
 'use strict';
 const http = require('http');
 const pug = require('pug');
-const server = http.createServer((req, res) => {
+const auth = require('http-auth');
+const basic = auth.basic(
+    {realm: 'Enquetes Area.'},
+    (username, passward, callback) => {
+        callback(username === 'guest' && passward === 'test');
+    });
+const server = http.createServer(basic, (req, res) => {
     console.info('Requested by ' + req.connection.remoteAddress);
+
+    if (req.url === '/logout') {
+        res.writeHead(404, {
+            'Content-Type': 'text/plain; charset=utf-8'
+        });
+        res.end('ログアウトしました');
+        return;
+    }
+    
     res.writeHead(200, {
         'Content-Type': 'text/html; charset=utf-8'
     });
@@ -56,5 +71,4 @@ const server = http.createServer((req, res) => {
 const port = process.env.PORT || 8000;
 server.listen(port, () => {
     console.info(`listening on ${port}`);
-    console.log(port);
 });
