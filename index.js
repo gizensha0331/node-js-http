@@ -12,7 +12,15 @@ const server = http.createServer(basic, (req, res) => {
 
     if (req.url === '/logout') {
         res.writeHead(401, {
-            'Content-Type': 'text/plain; charset=utf-8'
+            'Content-Type': 'text/html; charset=utf-8',
+            'Location': './logout2'
+        });
+        res.end('ログアウトしました');
+        return;
+    }
+    if (req.url === '/logout2') {
+        res.writeHead(200, {
+            'Content-Type': 'text/plain; charset=utf-8',
         });
         res.end('ログアウトしました');
         return;
