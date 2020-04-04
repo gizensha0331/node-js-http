@@ -4,18 +4,19 @@ const pug = require('pug');
 const auth = require('http-auth');
 const basic = auth.basic(
     {realm: 'Enquetes Area.'},
-    (username, passward, callback) => {
-        callback(username === 'guest' && passward === 'test');
+    (username, password, callback) => {
+        callback(username === 'guest' && password === 'test');
     });
 const server = http.createServer(basic, (req, res) => {
+    console.log(req.url);
     console.info('Requested by ' + req.connection.remoteAddress);
 
     if (req.url === '/logout') {
         res.writeHead(401, {
             'Content-Type': 'text/plain; charset=utf-8'
         });
-        
-        res.end('ログアウト');
+        res.write('ログアウト');
+        res.end();
         return;
     }
     
